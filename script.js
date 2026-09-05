@@ -3,16 +3,6 @@ function createGrid(gridNum) {
     const grid = document.createElement('div');
     const style = document.createElement('style');
     
-    style.textContent = `
-        .square:hover {
-            background-color: red;
-            transition-duration: 0s;
-        }
-        .square {
-            transition: 5s ease-in;
-        }
-    `;
-    
     grid.className = 'grid';
     grid.style.display = 'flex';
     grid.style.flexDirection = 'column';
@@ -42,6 +32,15 @@ function createGrid(gridNum) {
             square.style.border = '1px solid black';
             square.style.flexDirection = 'row';
             square.style.margin = '0';
+            
+            square.addEventListener('mouseenter', () => {
+                square.style.transitionDuration = '0s';
+                square.style.backgroundColor = 'red';
+            })
+            square.addEventListener('mouseleave', () => {
+                square.style.transitionDuration = '5s';
+                square.style.backgroundColor = 'transparent';
+            })
             row.appendChild(square);
         }
         
