@@ -28,7 +28,7 @@ function createGrid(gridNum) {
 
             square.className = 'square';
             square.style.height = `${100/gridNum}vh`;
-            square.style.width = `${100/gridNum}vw`;
+            square.style.aspectRatio = '1 / 1';
             square.style.border = '1px solid black';
             square.style.flexDirection = 'row';
             square.style.margin = '0';
