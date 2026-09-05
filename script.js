@@ -3,13 +3,13 @@ function createGrid(gridNum) {
     const grid = document.createElement('div');
     const style = document.createElement('style');
     
+    body.style.margin = '0';
+    body.style.height = '100vh';
     grid.className = 'grid';
     grid.style.display = 'flex';
     grid.style.flexDirection = 'column';
     grid.style.justifyContent = 'center';
     grid.style.alignItems = 'center'
-    grid.style.height = '100vh';
-    grid.style.width = '100vw';
     
     for (let i = 1; i <= gridNum; i++) {
         const row = document.createElement('div');
@@ -19,7 +19,6 @@ function createGrid(gridNum) {
         row.style.display = 'flex';
         row.style.justifyContent = 'center';
         row.style.alignItems = 'center';
-        row.style.width = '100vw';
         row.style.margin = '0';
         row.style.height = `${100/gridNum}vh`;
         
