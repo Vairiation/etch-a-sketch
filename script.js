@@ -49,6 +49,8 @@ function createGrid(gridNum) {
     setGridBtn.className = 'setGridBtn';
     setGridBtn.innerText = 'Set Grid';
     setGridBtn.style.border = '2px solid black 4px';
+    setGridBtn.style.position = 'absolute';
+    setGridBtn.style.zIndex = '10';
     setGridBtn.addEventListener('click', () => {
         const newGrid = prompt('How many square would you like per row of the grid?');
         
