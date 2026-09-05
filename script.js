@@ -1,8 +1,8 @@
 function createGrid(gridNum) {
     const body = document.querySelector('body');
     const grid = document.createElement('div');
-    const style = document.createElement('style');
-    
+    const setGridBtn = document.createElement('button');
+
     body.style.margin = '0';
     body.style.height = '100vh';
     grid.className = 'grid';
@@ -45,9 +45,20 @@ function createGrid(gridNum) {
         
         grid.appendChild(row);
     }
-    body.appendChild(style);
-    body.appendChild(grid);
 
+    setGridBtn.className = 'setGridBtn';
+    setGridBtn.innerText = 'Set Grid';
+    setGridBtn.style.border = '2px solid black 4px';
+    setGridBtn.addEventListener('click', () => {
+        const newGrid = prompt('How many square would you like per row of the grid?');
+        
+        document.querySelector('.grid')?.remove();
+        document.querySelector('.setGridBtn')?.remove();
+        createGrid(newGrid);
+    })
+    
+    body.appendChild(setGridBtn);
+    body.appendChild(grid);
 }
 
 createGrid(16);
