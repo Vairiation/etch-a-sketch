@@ -52,7 +52,9 @@ function createGrid(gridNum) {
     setGridBtn.style.position = 'absolute';
     setGridBtn.style.zIndex = '10';
     setGridBtn.addEventListener('click', () => {
-        const newGrid = prompt('How many square would you like per row of the grid?');
+        let newGrid = prompt('How many square would you like per row of the grid?');
+        
+        if (newGrid > 100) newGrid = 100;
         
         document.querySelector('.grid')?.remove();
         document.querySelector('.setGridBtn')?.remove();
