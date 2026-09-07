@@ -2,9 +2,14 @@ function createGrid(gridNum) {
     const body = document.querySelector('body');
     const grid = document.createElement('div');
     const setGridBtn = document.createElement('button');
-
+    const maxHeight = Math.min(window.innerWidth, window.innerHeight);
+    
     body.style.margin = '0';
-    body.style.height = '100vh';
+    body.style.minHeight = '100vh';
+    body.style.minWidth = '100vw';
+    body.style.display = 'flex';
+    body.style.justifyContent = 'center';
+    body.style.alignItems = 'center';
     grid.className = 'grid';
     grid.style.display = 'flex';
     grid.style.flexDirection = 'column';
@@ -20,13 +25,14 @@ function createGrid(gridNum) {
         row.style.justifyContent = 'center';
         row.style.alignItems = 'center';
         row.style.margin = '0';
-        row.style.height = `${100/gridNum}vh`;
+        row.style.height = `${maxHeight/gridNum}px`;
         
         for (let i = 1; i <= gridNum; i++) {
             const square = document.createElement('div');
 
             square.className = 'square';
-            square.style.height = `${100/gridNum}vh`;
+            square.style.boxSizing = 'border-box';
+            square.style.height = `${maxHeight/gridNum}px`;
             square.style.aspectRatio = '1 / 1';
             square.style.border = '1px solid black';
             square.style.flexDirection = 'row';
@@ -50,6 +56,8 @@ function createGrid(gridNum) {
     setGridBtn.innerText = 'Set Grid';
     setGridBtn.style.border = '2px solid black 4px';
     setGridBtn.style.position = 'absolute';
+    setGridBtn.style.top = '10px';
+    setGridBtn.style.left = '10px';
     setGridBtn.style.zIndex = '10';
     setGridBtn.addEventListener('click', () => {
         let newGrid = prompt('How many square would you like per row of the grid?');
