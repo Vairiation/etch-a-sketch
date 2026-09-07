@@ -39,7 +39,7 @@ function createGrid(gridNum) {
             
             square.addEventListener('mouseenter', () => {
                 square.style.transitionDuration = '0s';
-                square.style.backgroundColor = 'red';
+                square.style.backgroundColor = 'black';
             })
             square.addEventListener('mouseleave', () => {
                 square.style.transitionDuration = '5s';
