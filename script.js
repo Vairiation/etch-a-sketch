@@ -53,6 +53,7 @@ function createGrid(gridNum) {
 
     setGridBtn.className = 'setGridBtn';
     setGridBtn.innerText = 'Set Grid';
+    setGridBtn.style.fontSize = '1.5vh';
     setGridBtn.style.border = '2px solid black 4px';
     setGridBtn.style.position = 'absolute';
     setGridBtn.style.top = '10px';
@@ -61,6 +62,7 @@ function createGrid(gridNum) {
     setGridBtn.addEventListener('click', () => {
         let newGrid = prompt('How many square would you like per row of the grid?');
         
+        if (newGrid == null) newGrid = 16;
         if (newGrid > 100) newGrid = 100;
         
         document.querySelector('.grid')?.remove();
