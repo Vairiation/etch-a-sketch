@@ -25,7 +25,6 @@ function createGrid(gridNum) {
         row.style.justifyContent = 'center';
         row.style.alignItems = 'center';
         row.style.margin = '0';
-        row.style.height = `${maxHeight/gridNum}px`;
         
         for (let i = 1; i <= gridNum; i++) {
             const square = document.createElement('div');
