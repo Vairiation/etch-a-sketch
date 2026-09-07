@@ -1,4 +1,4 @@
-function createGrid(gridNum) {
+function createGrid(gridNum, fillOption) {
     const body = document.querySelector('body');
     const grid = document.createElement('div');
     const setGridBtn = document.createElement('button');
@@ -28,6 +28,7 @@ function createGrid(gridNum) {
         
         for (let i = 1; i <= gridNum; i++) {
             const square = document.createElement('div');
+            let opacity = 0;
 
             square.className = 'square';
             square.style.boxSizing = 'border-box';
@@ -37,14 +38,28 @@ function createGrid(gridNum) {
             square.style.flexDirection = 'row';
             square.style.margin = '0';
             
-            square.addEventListener('mouseenter', () => {
-                square.style.transitionDuration = '0s';
-                square.style.backgroundColor = `${getRandomColor()}`;
-            })
-            square.addEventListener('mouseleave', () => {
-                square.style.transitionDuration = '5s';
-                square.style.backgroundColor = 'transparent';
-            })
+            if (fillOption === 'opacity') {
+
+                square.addEventListener('mouseenter', () => {
+                    square.style.backgroundColor = `rgba(0, 0, 0, ${opacity})`;
+                    if (opacity < 1) {
+                        opacity = ((opacity * 100) + 10) / 100;
+                    }
+                });
+            } else if (fillOption === 'randomColor') {
+                square.addEventListener('mouseenter', () => {
+                    square.style.transitionDuration = '0s';
+                    square.style.backgroundColor = `${getRandomColor()}`;
+                })
+            }
+
+            if (fillOption === 'randomColor') {
+                square.addEventListener('mouseleave', () => {
+                    square.style.transitionDuration = '5s';
+                    square.style.backgroundColor = 'transparent';
+                })
+            }
+
             row.appendChild(square);
         }
         
@@ -67,7 +82,7 @@ function createGrid(gridNum) {
         
         document.querySelector('.grid')?.remove();
         document.querySelector('.setGridBtn')?.remove();
-        createGrid(newGrid);
+        createGrid(newGrid, fillOption);
     })
     
     body.appendChild(setGridBtn);
@@ -84,4 +99,4 @@ function getRandomColor() {
     return color;
 }
 
-createGrid(16);
+createGrid(16, 'opacity');
