@@ -1,7 +1,13 @@
+const MODE = {
+    REGULAR_MODE: 'regular',
+    RANDOM_MODE: 'random'
+};
+
 function createGrid(gridNum, fillOption) {
     const body = document.querySelector('body');
     const grid = document.createElement('div');
     const setGridBtn = document.createElement('button');
+    const fillOptionBtns = [document.createElement('button'), document.createElement('button')];
     const maxHeight = Math.min(window.innerWidth, window.innerHeight);
     
     body.style.margin = '0';
@@ -38,7 +44,7 @@ function createGrid(gridNum, fillOption) {
             square.style.flexDirection = 'row';
             square.style.margin = '0';
             
-            if (fillOption === 'opacity') {
+            if (fillOption === MODE.REGULAR_MODE) {
 
                 square.addEventListener('mouseenter', () => {
                     square.style.backgroundColor = `rgba(0, 0, 0, ${opacity})`;
@@ -46,14 +52,14 @@ function createGrid(gridNum, fillOption) {
                         opacity = ((opacity * 100) + 10) / 100;
                     }
                 });
-            } else if (fillOption === 'randomColor') {
+            } else if (fillOption === MODE.RANDOM_MODE) {
                 square.addEventListener('mouseenter', () => {
                     square.style.transitionDuration = '0s';
                     square.style.backgroundColor = `${getRandomColor()}`;
                 })
             }
 
-            if (fillOption === 'randomColor') {
+            if (fillOption === MODE.RANDOM_MODE) {
                 square.addEventListener('mouseleave', () => {
                     square.style.transitionDuration = '5s';
                     square.style.backgroundColor = 'transparent';
@@ -80,12 +86,36 @@ function createGrid(gridNum, fillOption) {
         if (newGrid == null) newGrid = 16;
         if (newGrid > 100) newGrid = 100;
         
-        document.querySelector('.grid')?.remove();
-        document.querySelector('.setGridBtn')?.remove();
+        removeOldGrid();
         createGrid(newGrid, fillOption);
     })
     
+    fillOptionBtns[0].className = 'fillOptionBtn';
+    fillOptionBtns[0].innerText = 'Regular Mode';
+    fillOptionBtns[0].style.top = '40px';
+    fillOptionBtns[0].addEventListener('click', () => {
+        removeOldGrid();
+        createGrid(gridNum, MODE.REGULAR_MODE);
+    });
+    fillOptionBtns[1].className = 'fillOptionBtn';
+    fillOptionBtns[1].innerText = 'Random Mode';
+    fillOptionBtns[1].style.top = '70px';
+    fillOptionBtns[1].addEventListener('click', () => {
+        removeOldGrid();
+        createGrid(gridNum, MODE.RANDOM_MODE);
+    });
+
+    for (let button of fillOptionBtns) {
+        button.style.fontSize = '1.5vh';
+        button.style.border = '2px solid black 4px';
+        button.style.position = 'absolute';
+        button.style.left = '10px';
+        button.style.zIndex = '10';
+    }
+    
     body.appendChild(setGridBtn);
+    body.appendChild(fillOptionBtns[0]);
+    body.appendChild(fillOptionBtns[1]);
     body.appendChild(grid);
 }
 
@@ -99,4 +129,10 @@ function getRandomColor() {
     return color;
 }
 
-createGrid(16, 'opacity');
+function removeOldGrid() {
+    document.querySelector('.grid')?.remove();
+    document.querySelector('.setGridBtn')?.remove();
+    document.querySelector('.fillOptionBtn')?.remove();
+}
+
+createGrid(16, MODE.REGULAR_MODE);
